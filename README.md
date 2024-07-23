@@ -8,9 +8,8 @@ This repo contains my Linux dotfiles.
 
 ## TODO
 
-- Finish Oh-My-Zsh install (keep working on config)
-- Install neovim
-- Install a better terminal emulator
+- Configure neovim
+- (Maybe) Install a better terminal emulator
 
 ## Resources Used:
 
