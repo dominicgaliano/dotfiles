@@ -10,6 +10,9 @@ fi
 # IntelliJ binary
 export PATH=$PATH:/opt/idea/bin
 
+#Go binary
+export PATH=$PATH:/usr/local/go/bin
+
 # Path to your Oh My Zsh installation.
 export ZSH="$HOME/.oh-my-zsh"
 
