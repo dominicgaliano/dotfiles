@@ -84,9 +84,8 @@ return {
             mapping = cmp.mapping.preset.insert({
                 ['<C-p>'] = cmp.mapping.select_prev_item(cmp_select),
                 ['<C-n>'] = cmp.mapping.select_next_item(cmp_select),
-                -- it turns out that <Ctrl + Enter> = <new line char> which is
-                -- captured by <C-J> for some reason. Who would've known.
-                -- https://stackoverflow.com/questions/598113/can-terminals-detect-shift-enter-or-control-enter
+                -- it turns out that <Ctrl + Enter> = <new line char>
+                -- haven't been able to get this to work, so I am going with C-J for now
                 ['<C-J>'] = cmp.mapping.confirm({ select = true }),
                 ["<C-Space>"] = cmp.mapping.complete(),
             }),
