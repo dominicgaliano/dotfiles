@@ -108,5 +108,5 @@ return {
                 prefix = "",
             },
         })
-    end
+    end,
 }
