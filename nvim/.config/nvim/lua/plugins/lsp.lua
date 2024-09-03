@@ -33,7 +33,9 @@ return {
                 "svelte",
                 "html",
                 "clangd",
+                "pyright",
             },
+
             handlers = {
                 function(server_name) -- default handler (optional)
                     require("lspconfig")[server_name].setup {
@@ -68,6 +70,21 @@ return {
                                 }
                             }
                         }
+                    }
+                end,
+
+                ["pyright"] = function()
+                    require("lspconfig").pyright.setup {
+                        capabilities = capabilities,
+                        settings = {
+                            python = {
+                                analysis = {
+                                    typecheckingmode = "strict",
+                                    autosearchpaths = true,
+                                    uselibrarycodefortypes = true,
+                                },
+                            },
+                        },
                     }
                 end,
             }

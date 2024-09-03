@@ -3,3 +3,7 @@ mutexes
 mutex
 network
 enqueues
+Reusability
+Lifecycle
+periodic
+coordinated
