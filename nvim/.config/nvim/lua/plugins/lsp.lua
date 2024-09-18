@@ -28,12 +28,12 @@ return {
             ensure_installed = {
                 "lua_ls",
                 "gopls",
-                "tsserver",
                 "eslint",
                 "svelte",
                 "html",
                 "clangd",
                 "pyright",
+                "spectral",
             },
 
             handlers = {
@@ -85,6 +85,19 @@ return {
                                 },
                             },
                         },
+                    }
+                end,
+
+                ["jdtls"] = function()
+                    require("lspconfig").jdtls.setup {
+                        settings = {
+                            ['jdtls'] = {},
+                        }
+                    }
+                end,
+
+                ["spectral"] = function()
+                    require("lspconfig").spectral.setup {
                     }
                 end,
             }

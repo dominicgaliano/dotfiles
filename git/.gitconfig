@@ -3,3 +3,5 @@
 [user]
 	email = dgaliano@utexas.edu
 	name = Dominic Galiano
+[core]
+	editor = vim

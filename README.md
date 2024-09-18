@@ -6,6 +6,10 @@ This repo contains my Linux dotfiles.
 
 - Symlinks managed using [Stow](https://www.gnu.org/software/stow/manual/stow.html)
 
+## Requirements
+
+- Neovim v0.10.1
+
 ## TODO
 
 - Continue configuring neovim
