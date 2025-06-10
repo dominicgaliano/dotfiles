@@ -7,7 +7,9 @@ return {
             -- Customize or remove this keymap to your liking
             "<leader>f",
             function()
+                print("Formatting...")
                 require("conform").format({ async = true })
+                print("Formatting complete.")
             end,
             mode = "",
             desc = "Format buffer",
@@ -26,6 +28,7 @@ return {
             c = { "clangd" },
             java = { "google-java-format" },
             yaml = { "prettierd", "prettier", stop_after_first = true },
+            cs = { "csharpier" },
         },
         -- Set default options
         default_format_opts = {

@@ -34,6 +34,8 @@ return {
                 "clangd",
                 "pyright",
                 "spectral",
+                "csharp_ls",
+                "graphql",
             },
 
             handlers = {
@@ -41,6 +43,11 @@ return {
                     require("lspconfig")[server_name].setup {
                         capabilities = capabilities
                     }
+                end,
+
+                ["graphql"] = function()
+                    local lspconfig = require("lspconfig")
+                    lspconfig.graphql.setup {}
                 end,
 
                 ["lua_ls"] = function()
@@ -88,6 +95,26 @@ return {
                     }
                 end,
 
+                ["csharp_ls"] = function()
+                    require("lspconfig").csharp_ls.setup {
+                        cmd = { "csharp-ls" },
+                        settings = {
+                            telemetry = {
+                                enabled = false,
+                            },
+                        },
+                        root_dir = function(fname)
+                            local util = require("lspconfig.util")
+                            return util.root_pattern '*.sln' (fname) or util.root_pattern '*.csproj' (fname)
+                        end,
+                        filetypes = { 'cs' },
+                        init_options = {
+                            AutomaticWorkspaceInit = true,
+                        },
+                    }
+                end,
+
+
                 ["jdtls"] = function()
                     require("lspconfig").jdtls.setup {
                         settings = {
@@ -100,6 +127,37 @@ return {
                     require("lspconfig").spectral.setup {
                     }
                 end,
+
+                -- hands down the most annoying thing ever
+                -- need to figure out how to toggle it and have it default off
+                -- before I re-enabled
+                -- keep this here because I do find it useful for class reports
+                -- ["harper-ls"] = function()
+                --     require("lspconfig").harper_ls.setup {
+                --         settings = {
+                --             ["harper-ls"] = {
+                --                 linters = {
+                --                     spell_check = true,
+                --                     spelled_numbers = false,
+                --                     an_a = true,
+                --                     sentence_capitalization = true,
+                --                     unclosed_quotes = true,
+                --                     wrong_quotes = false,
+                --                     long_sentences = true,
+                --                     repeated_words = true,
+                --                     spaces = true,
+                --                     matcher = true,
+                --                     correct_number_suffix = true,
+                --                     number_suffix_capitalization = true,
+                --                     multiple_sequential_pronouns = true,
+                --                     linking_verbs = false,
+                --                     avoid_curses = true,
+                --                     terminating_conjunctions = true
+                --                 }
+                --             }
+                --         },
+                --     }
+                -- end,
             }
         })
 
