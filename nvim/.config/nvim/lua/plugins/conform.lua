@@ -29,19 +29,27 @@ return {
             java = { "google-java-format" },
             yaml = { "prettierd", "prettier", stop_after_first = true },
             cs = { "csharpier" },
-            python = { "black" },
+            kotlin = { "ktlint" },
         },
+
         -- Set default options
         default_format_opts = {
             lsp_format = "fallback",
         },
+
         -- Set up format-on-save
         format_on_save = { timeout_ms = 500 },
+
         -- Customize formatters
         formatters = {
             shfmt = {
                 prepend_args = { "-i", "2" },
             },
+            -- ktlint = {
+            --     command = "ktlint",
+            --     args = { "--format", "--stdin", "--relative", "--stdin-file-path", "$FILENAME" },
+            --     stdin = true,
+            -- },
         },
     },
     init = function()

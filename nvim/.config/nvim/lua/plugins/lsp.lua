@@ -36,6 +36,7 @@ return {
                 "spectral",
                 "csharp_ls",
                 "graphql",
+                "kotlin_language_server",
             },
 
             handlers = {
@@ -125,6 +126,14 @@ return {
 
                 ["spectral"] = function()
                     require("lspconfig").spectral.setup {
+                    }
+                end,
+
+                ["kotlin_language_server"] = function()
+                    local lspconfig = require("lspconfig")
+                    lspconfig.kotlin_language_server.setup {
+                        capabilities = capabilities,
+                        -- root_dir = lspconfig.util.root_pattern("settings.gradle", "settings.gradle.kts", "build.gradle", "build.gradle.kts", ".git"),
                     }
                 end,
 
