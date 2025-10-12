@@ -65,3 +65,4 @@ vim.keymap.set('n', 'gr', vim.lsp.buf.references, opts)
 --     vim.lsp.buf.format({ async = true })
 -- end, opts)
 
+vim.keymap.set('n', '<leader>ca', vim.lsp.buf.code_action)

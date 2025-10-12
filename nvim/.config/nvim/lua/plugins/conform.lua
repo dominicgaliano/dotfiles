@@ -29,6 +29,7 @@ return {
             java = { "google-java-format" },
             yaml = { "prettierd", "prettier", stop_after_first = true },
             cs = { "csharpier" },
+            python = { "black" },
         },
         -- Set default options
         default_format_opts = {

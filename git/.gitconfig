@@ -5,3 +5,5 @@
 	name = Dominic Galiano
 [core]
 	editor = vim
+[push]
+	autoSetupRemote = true
