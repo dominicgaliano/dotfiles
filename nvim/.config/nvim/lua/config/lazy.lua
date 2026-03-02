@@ -26,5 +26,8 @@ require("lazy").setup({
     -- This doesn't seem to work for some reason
     -- install = { colorscheme = { "rose-pine" } },
     -- automatically check for plugin updates
-    checker = { enabled = true },
+    checker = { enabled = false },
+    change_detection = {
+        notify = false,
+    },
 })

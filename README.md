@@ -21,3 +21,7 @@ This repo contains my Linux dotfiles.
 - https://www.jakewiesler.com/blog/managing-dotfiles
 - [Oh my zsh](https://github.com/ohmyzsh/ohmyzsh)
 - [Neovim Config](https://www.youtube.com/watch?v=w7i4amO_zaE)
+
+## Note to Self
+
+Install: node/nvm, go, ripgrep

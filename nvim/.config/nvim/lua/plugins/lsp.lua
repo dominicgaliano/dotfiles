@@ -24,6 +24,7 @@ return {
 
         require("fidget").setup({})
         require("mason").setup()
+
         require("mason-lspconfig").setup({
             ensure_installed = {
                 "lua_ls",
@@ -33,142 +34,98 @@ return {
                 "html",
                 "clangd",
                 "pyright",
-                "spectral",
                 "csharp_ls",
                 "graphql",
                 "kotlin_language_server",
             },
-
-            handlers = {
-                function(server_name) -- default handler (optional)
-                    require("lspconfig")[server_name].setup {
-                        capabilities = capabilities
-                    }
-                end,
-
-                ["graphql"] = function()
-                    local lspconfig = require("lspconfig")
-                    lspconfig.graphql.setup {}
-                end,
-
-                ["lua_ls"] = function()
-                    local lspconfig = require("lspconfig")
-                    lspconfig.lua_ls.setup {
-                        capabilities = capabilities,
-                        settings = {
-                            Lua = {
-                                runtime = { version = "Lua 5.1" },
-                                diagnostics = {
-                                    globals = { "bit", "vim", "it", "describe", "before_each", "after_each" },
-                                }
-                            }
-                        }
-                    }
-                end,
-                ["clangd"] = function()
-                    local lspconfig = require("lspconfig")
-                    lspconfig.clangd.setup {
-                        capabilities = capabilities,
-                        cmd = { "clangd", "--background-index" },
-                        root_dir = lspconfig.util.root_pattern("compile_commands.json", "compile_flags.txt", ".git"),
-                        settings = {
-                            clangd = {
-                                completion = {
-                                    enableSnippets = true
-                                }
-                            }
-                        }
-                    }
-                end,
-
-                ["pyright"] = function()
-                    require("lspconfig").pyright.setup {
-                        capabilities = capabilities,
-                        settings = {
-                            python = {
-                                analysis = {
-                                    typecheckingmode = "strict",
-                                    autosearchpaths = true,
-                                    uselibrarycodefortypes = true,
-                                },
-                            },
-                        },
-                    }
-                end,
-
-                ["csharp_ls"] = function()
-                    require("lspconfig").csharp_ls.setup {
-                        cmd = { "csharp-ls" },
-                        settings = {
-                            telemetry = {
-                                enabled = false,
-                            },
-                        },
-                        root_dir = function(fname)
-                            local util = require("lspconfig.util")
-                            return util.root_pattern '*.sln' (fname) or util.root_pattern '*.csproj' (fname)
-                        end,
-                        filetypes = { 'cs' },
-                        init_options = {
-                            AutomaticWorkspaceInit = true,
-                        },
-                    }
-                end,
-
-
-                ["jdtls"] = function()
-                    require("lspconfig").jdtls.setup {
-                        settings = {
-                            ['jdtls'] = {},
-                        }
-                    }
-                end,
-
-                ["spectral"] = function()
-                    require("lspconfig").spectral.setup {
-                    }
-                end,
-
-                ["kotlin_language_server"] = function()
-                    local lspconfig = require("lspconfig")
-                    lspconfig.kotlin_language_server.setup {
-                        capabilities = capabilities,
-                        -- root_dir = lspconfig.util.root_pattern("settings.gradle", "settings.gradle.kts", "build.gradle", "build.gradle.kts", ".git"),
-                    }
-                end,
-
-                -- hands down the most annoying thing ever
-                -- need to figure out how to toggle it and have it default off
-                -- before I re-enabled
-                -- keep this here because I do find it useful for class reports
-                -- ["harper-ls"] = function()
-                --     require("lspconfig").harper_ls.setup {
-                --         settings = {
-                --             ["harper-ls"] = {
-                --                 linters = {
-                --                     spell_check = true,
-                --                     spelled_numbers = false,
-                --                     an_a = true,
-                --                     sentence_capitalization = true,
-                --                     unclosed_quotes = true,
-                --                     wrong_quotes = false,
-                --                     long_sentences = true,
-                --                     repeated_words = true,
-                --                     spaces = true,
-                --                     matcher = true,
-                --                     correct_number_suffix = true,
-                --                     number_suffix_capitalization = true,
-                --                     multiple_sequential_pronouns = true,
-                --                     linking_verbs = false,
-                --                     avoid_curses = true,
-                --                     terminating_conjunctions = true
-                --                 }
-                --             }
-                --         },
-                --     }
-                -- end,
-            }
         })
+
+        require("mason-lspconfig").setup_handlers({
+
+            -- default handler
+            function(server_name)
+                vim.lsp.config(server_name, {
+                    capabilities = capabilities,
+                })
+                vim.lsp.enable(server_name)
+            end,
+
+            ["lua_ls"] = function()
+                vim.lsp.config("lua_ls", {
+                    capabilities = capabilities,
+                    settings = {
+                        Lua = {
+                            runtime = { version = "Lua 5.1" },
+                            diagnostics = {
+                                globals = { "bit", "vim", "it", "describe", "before_each", "after_each" },
+                            },
+                        },
+                    },
+                })
+                vim.lsp.enable("lua_ls")
+            end,
+
+            ["clangd"] = function()
+                vim.lsp.config("clangd", {
+                    capabilities = capabilities,
+                    cmd = { "clangd", "--background-index" },
+                    root_dir = vim.fs.root(0, {
+                        "compile_commands.json",
+                        "compile_flags.txt",
+                        ".git",
+                    }),
+                    settings = {
+                        clangd = {
+                            completion = {
+                                enableSnippets = true,
+                            },
+                        },
+                    },
+                })
+                vim.lsp.enable("clangd")
+            end,
+
+            ["pyright"] = function()
+                vim.lsp.config("pyright", {
+                    capabilities = capabilities,
+                    settings = {
+                        python = {
+                            analysis = {
+                                typeCheckingMode = "strict",
+                                autoSearchPaths = true,
+                                useLibraryCodeForTypes = true,
+                            },
+                        },
+                    },
+                })
+                vim.lsp.enable("pyright")
+            end,
+
+            ["csharp_ls"] = function()
+                vim.lsp.config("csharp_ls", {
+                    cmd = { "csharp-ls" },
+                    settings = {
+                        telemetry = { enabled = false },
+                    },
+                    root_dir = function(fname)
+                        return vim.fs.root(fname, { "*.sln", "*.csproj" })
+                    end,
+                    filetypes = { "cs" },
+                    init_options = {
+                        AutomaticWorkspaceInit = true,
+                    },
+                })
+                vim.lsp.enable("csharp_ls")
+            end,
+
+            ["kotlin_language_server"] = function()
+                vim.lsp.config("kotlin_language_server", {
+                    capabilities = capabilities,
+                })
+                vim.lsp.enable("kotlin_language_server")
+            end,
+        })
+
 
         local cmp_select = { behavior = cmp.SelectBehavior.Select }
 
