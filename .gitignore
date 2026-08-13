@@ -1,0 +1,7 @@
+# Machine-local / work-specific shell config (may contain secrets).
+# Lives in $HOME, never in this repo -- listed here as a second line of defense.
+.zshrc.local
+*.local
+
+# Editor / OS noise
+.DS_Store

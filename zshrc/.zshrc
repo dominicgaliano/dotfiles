@@ -133,6 +133,9 @@ alias vim="nvim"
 # clipboard alias
 alias xclip="xclip -selection c"
 
+# claude code - always launch in auto permission mode
+alias claude="claude --permission-mode auto"
+
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 
@@ -155,3 +158,8 @@ alias vnv='. venv/bin/activate'
 # cuda setup
 export PATH=/usr/local/cuda/bin:$PATH
 export LD_LIBRARY_PATH=/usr/local/cuda/lib64:$LD_LIBRARY_PATH
+[[ -e ~/.umt/umt-profile ]] && emulate sh -c 'source $HOME/.umt/umt-profile'
+
+# Machine-local config (work secrets, per-host tweaks). Not tracked in this repo.
+# See README; create ~/.zshrc.local as needed.
+[[ ! -f ~/.zshrc.local ]] || source ~/.zshrc.local

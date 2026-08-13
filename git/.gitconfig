@@ -5,5 +5,6 @@
 	name = Dominic Galiano
 [core]
 	editor = vim
+	excludesfile = /Users/dominic.galiano/.gitignore
 [push]
 	autoSetupRemote = true

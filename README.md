@@ -6,6 +6,20 @@ This repo contains my Linux dotfiles.
 
 - Symlinks managed using [Stow](https://www.gnu.org/software/stow/manual/stow.html)
 
+## Machine-local config (secrets, work-only settings)
+
+`zshrc/.zshrc` ends with:
+
+```zsh
+[[ ! -f ~/.zshrc.local ]] || source ~/.zshrc.local
+```
+
+`~/.zshrc.local` is **not** in this repo and is not stowed — create it by hand on each
+machine. Anything that must not be committed goes there: API tokens, employer-specific
+setup, per-host paths. Because it is sourced last, it can also override anything above it.
+
+Set it up with `chmod 600 ~/.zshrc.local` since it holds credentials.
+
 ## Requirements
 
 - Neovim v0.10.1

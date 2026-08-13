@@ -1,0 +1,36 @@
+let mapleader = " "
+
+set number relativenumber
+
+" Show usages popup
+nnoremap <leader>u :action ShowUsages<CR>
+
+" Go to definition
+nnoremap gd :action GotoDeclaration<CR>
+
+" Find implementations
+nnoremap gi :action GotoImplementation<CR>
+
+" Find type definition
+nnoremap gt :action GotoTypeDeclaration<CR>
+
+" Rename symbol
+nnoremap <leader>r :action RenameElement<CR>
+
+" Find usages tool window
+nnoremap <leader>f :action FindUsages<CR>
+
+" Toggle git blame annotations
+nnoremap <leader>gb :action Annotate<CR>
+
+" Yank to the system clipboard (plain y still uses the vim registers)
+nnoremap <leader>y "+y
+vnoremap <leader>y "+y
+nnoremap <leader>Y "+Y
+
+" Paste over a visual selection without clobbering the yank register
+xnoremap <leader>p "_dP
+
+" Delete into the black hole register, i.e. delete without yanking
+nnoremap <leader>d "_d
+vnoremap <leader>d "_d
